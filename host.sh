@@ -24,7 +24,7 @@ sudo qm set ${VM_ID} --serial0 socket
 sudo qm set ${VM_ID} --ostype l26
 sudo qm set ${VM_ID} --memory 2048
 sudo qm set ${VM_ID} --boot c --bootdisk scsi0
-sudo qm set ${VM_ID} scsi0 16G
+sudo qm resize ${VM_ID} scsi0 16G
 sudo qm set ${VM_ID} --agent enabled=1
 sudo qm template ${VM_ID}
 
