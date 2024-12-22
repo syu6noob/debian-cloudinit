@@ -20,7 +20,7 @@ do
 bind-addr: 0.0.0.0:8080
 auth: password
 password: $password
-cert: false
+cert: true
 EOF
       
       sudo systemctl enable --now code-server@root
