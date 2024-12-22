@@ -20,7 +20,7 @@ do
       curl -fsSL https://code-server.dev/install.sh | sh
 
       sudo mkdir -p "/home/$user/.config/code-server"
-      sudo cat > "/home/$user/.config/code-server/config.yaml" << EOF
+      sudo tee "/home/$user/.config/code-server/config.yaml" > /dev/null << EOF
 bind-addr: 0.0.0.0:8080
 auth: password
 password: $password
