@@ -4,14 +4,16 @@ set -euxo pipefail
 password="password"
 user=`whoami`
 
-sudo apt -y install qemu-guest-agent
-sudo systemctl start qemu-guest-agent
-
-sudo timedatectl set-timezone Asia/Tokyo
-
 while (( $# > 0 ))
 do
   case $1 in
+    --timezone)
+      sudo timedatectl set-timezone Asia/Tokyo
+      ;;
+    --qemu)
+      sudo apt -y install qemu-guest-agent
+      sudo systemctl start qemu-guest-agent
+      ;;
     --code)
       # For code-server
       cd ~
