@@ -2,7 +2,7 @@
 set -euo pipefail
 
 password="password"
-user="root"
+user=`whoami`
 
 sudo apt -y install qemu-guest-agent
 sudo systemctl start qemu-guest-agent
@@ -12,7 +12,6 @@ sudo timedatectl set-timezone Asia/Tokyo
 while (( $# > 0 ))
 do
   case $1 in
-    # ...
     --code)
       # For code-server
       cd ~
@@ -28,7 +27,21 @@ EOF
       sudo systemctl enable --now "code-server@$user"
       sudo systemctl start --now "code-server@$user"
       ;;
-    # ...
+      
+    --docker)
+      sudo apt install -y dbus-user-session
+      sudo apt install -y slirp4netns
+      sudo apt install -y slirp4netns
+
+      sudo apt install -y docker-ce-rootless-extras
+      
+      dockerd-rootless-setuptool.sh install
+
+      systemctl --user start docker
+      systemctl --user enable docker
+
+      sudo loginctl enable-linger $(whoami)
+      ;;
   esac
   shift
 done
