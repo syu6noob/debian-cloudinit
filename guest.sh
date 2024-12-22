@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-$password="password"
+password="password"
 
 sudo apt -y install qemu-guest-agent
 sudo systemctl start qemu-guest-agent
