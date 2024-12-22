@@ -31,7 +31,7 @@ EOF
     --docker)
       sudo apt install -y dbus-user-session
       sudo apt install -y slirp4netns
-      sudo apt install -y slirp4netns
+      sudo apt install -y uidmap
 
       curl -fsSL https://get.docker.com/rootless | sh
 
