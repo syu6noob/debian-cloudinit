@@ -33,9 +33,7 @@ EOF
       sudo apt install -y slirp4netns
       sudo apt install -y slirp4netns
 
-      sudo apt install -y docker-ce-rootless-extras
-      
-      dockerd-rootless-setuptool.sh install
+      curl -fsSL https://get.docker.com/rootless | sh
 
       systemctl --user start docker
       systemctl --user enable docker
