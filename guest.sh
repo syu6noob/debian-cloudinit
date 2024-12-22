@@ -18,7 +18,8 @@ do
       # For code-server
       cd ~
       curl -fsSL https://code-server.dev/install.sh | sh
-      
+
+      mkdir -p "/home/$user/.config/code-server"
       cat > "/home/$user/.config/code-server/config.yaml" << EOF
 bind-addr: 0.0.0.0:8080
 auth: password
