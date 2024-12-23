@@ -16,6 +16,25 @@ do
       
       echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m timezone setting was completed."
       ;;
+    --xtermjs)
+      sudo tee "/etc/default/grub" > /dev/null << EOF
+# If you change this file, run 'update-grub' afterwards to update
+# /boot/grub/grub.cfg.
+# For full documentation of the options in this file, see:
+#    info -f grub -n 'Simple configuration'
+
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR='lsb_release -i -s 2> /dev/null | | echo Debian'
+GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX="console=tty0 console=ttyS0,115200 consoleblank=0"
+GRUB_TERMINAL="serial"
+GRUB_SERIAL_COMMAND="serial -- speed=115200"
+
+EOF
+
+      sudo update-grub
+      ;;
     --qemu)
       echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m setting qemu..."
       
