@@ -67,7 +67,7 @@ EOF
     --docker)
       echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m setting docker..."
 
-      chmod syu6:root 
+      chmod syu6:root "/home/$user/.config"
       
       sudo apt install -y dbus-user-session
       sudo apt install -y slirp4netns
@@ -82,6 +82,11 @@ EOF
 
       sudo export PATH=/home/"$user"/bin:$PATH
       sudo export DOCKER_HOST="unix:///run/user/$uid/docker.sock"
+
+      wget https://github.com/docker/compose/releases/download/v2.32.1/docker-compose-linux-x86_64 -o docker-compose
+      mkdir "/home/$user/.docker/cli-plugins"
+      mv "./docker-compose" "/home/$user/.docker/cli-plugins/docker-compose"
+      chmod +x "/home/$user/.docker/cli-plugins/docker-compose"
       
       echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m docker setting was completed."
       ;;
