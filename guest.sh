@@ -5,6 +5,7 @@ echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m"
 
 password="password"
 user=`whoami`
+uid=`id -u`
 
 while (( $# > 0 ))
 do
@@ -65,6 +66,8 @@ EOF
       
     --docker)
       echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m setting docker..."
+
+      chmod syu6:root 
       
       sudo apt install -y dbus-user-session
       sudo apt install -y slirp4netns
@@ -76,6 +79,9 @@ EOF
       systemctl --user enable docker
 
       sudo loginctl enable-linger $(whoami)
+
+      sudo export PATH=/home/"$user"/bin:$PATH
+      sudo export DOCKER_HOST="unix:///run/user/$uid/docker.sock"
       
       echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m docker setting was completed."
       ;;
