@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euxo pipefail
 
+echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m"
+
 password="password"
 user=`whoami`
 
@@ -8,14 +10,23 @@ while (( $# > 0 ))
 do
   case $1 in
     --timezone)
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m setting timezone..."
+      
       sudo timedatectl set-timezone Asia/Tokyo
+      
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m timezone setting was completed."
       ;;
     --qemu)
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m setting qemu..."
+      
       sudo apt -y install qemu-guest-agent
       sudo systemctl start qemu-guest-agent
+      
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m qemu setting was completed."
       ;;
     --code)
-      # For code-server
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m setting code-server..."
+
       cd ~
       curl -fsSL https://code-server.dev/install.sh | sh
 
@@ -29,9 +40,13 @@ EOF
       
       sudo systemctl enable --now "code-server@$user"
       sudo systemctl start --now "code-server@$user"
+
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m code-server setting was completed."
       ;;
       
     --docker)
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m setting docker..."
+      
       sudo apt install -y dbus-user-session
       sudo apt install -y slirp4netns
       sudo apt install -y uidmap
@@ -42,6 +57,8 @@ EOF
       systemctl --user enable docker
 
       sudo loginctl enable-linger $(whoami)
+      
+      echo -e "\e[1;42m syu6noob/docker-cloudinit \e[0m docker setting was completed."
       ;;
   esac
   shift
